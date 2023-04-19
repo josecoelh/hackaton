@@ -1,0 +1,39 @@
+﻿@page "Details/{sku}"
+@using IDKjustwork.Model;
+@Model string
+@RouteData.Values["sku"] 
+@{
+    //var with relative path of the csv file
+    var path = "C:\\Users\\JPC\\source\\repos\\TrackAndTraceDPD\\Hekto\\IDKjustwork\\databaselol.csv";
+
+    var details = CSVReader.ReadCSV(path, ",")/*.Where(it => it.SKU == Model)*/.FirstOrDefault();
+}
+<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <h4 class="modal-title" id="myModalLabel">@details.DisplayName</h4>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-6">
+                <img class="img-fluid" alt="Bootstrap template" src=@details.urlImagem>
+            </div>
+            <div class="col-md-6 product_content">
+                <h4>Categoria: @details.category</h4>
+                <div class="ratings">
+                    <p>
+                    </p><div id="rating4" class="sui-rating"><div id="shieldRating-range-2" class="sui-rating-range" tabindex="0" style="width: 80px; height: 16px;"><div class="sui-rating-selected" style="height: 16px; width: 48px;"></div><div class="sui-rating-hover" style="height:16px"></div></div></div>
+                    (10 reviews)
+                    <p></p>
+                </div>
+                <br>
+                <p class="text-justify">Nada a Dizer </p>
+                <br>
+                <h2 class="float-xs-right">@details.MaxPrice</h2>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <a href="@Url.Page("List")" class="btn btn-primary"><i class="fa fa-info"></i> Close</a>
+    </div>
+</div>

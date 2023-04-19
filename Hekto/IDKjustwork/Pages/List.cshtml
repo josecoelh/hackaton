@@ -1,0 +1,53 @@
+﻿@page "/"
+@using IDKjustwork.Model;
+@model IDKjustwork.Pages.ListModel
+@{
+
+    //var with relative path of the csv file
+    var path = "C:\\Users\\JPC\\source\\repos\\TrackAndTraceDPD\\Hekto\\IDKjustwork\\databaselol.csv";
+
+    var modelList = CSVReader.ReadCSV(path, ",");
+
+    var x = 10;
+
+}
+
+<div class="container">
+    <div class="row">
+        @foreach (var item in modelList)
+        {
+            <div class="col-md-4" style="padding:15px;">
+                <div style="display:inline-block; border:solid 1px #808080; padding:15px">
+                    <div>
+                        <img class="img-responsive" src=@item.urlImagem />
+                        <br />
+                        <h2 class="pull-right">@item.MaxPrice €</h2>
+                        <h2><a href="#">@item.DisplayName</a></h2>
+                        <br />
+                        <p class="text-justify">@item.brand</p>
+                    </div>
+                    <br />
+                    <div class="ratings text-center">
+                        <p>
+                            <div id="rating1"></div>
+                            (10 reviews)
+                        </p>
+                    </div>
+                    <br />
+                    <div class="btn-ground text-center" style="padding-bottom: 30px">
+                        <button type="button" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Add</button>
+                        <a href="@Url.Page("Details",new {item.SKU})" class="btn btn-primary"><i class="fa fa-info"></i> Info</a>
+                    </div>
+                </div>
+            </div>
+        }
+
+               
+     
+    </div>
+</div>
+
+
+
+
+
